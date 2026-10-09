@@ -1,0 +1,38 @@
+model:
+  backend: vllm
+  model_id: organization/model-name
+  options:
+    tensor_parallel_size: 1
+
+task:
+  source: local
+  path: /path/to/tasks.jsonl
+  prompt_field: prompt
+  id_field: id
+  answer_field: answer
+
+taxonomy:
+  transformation: inherent
+  depth: conceptual
+  focus: outcome
+  reference: historical
+  # Reproduction-specific instructions belong here; no concrete method is bundled.
+  prompt_template: "{prompt}"
+
+normalization:
+  plugin: reasoning_tags
+
+method:
+  plugin: direct
+
+generation:
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 1024
+  n: 1
+
+run:
+  output_dir: outputs/example
+  seed: 42
+  batch_size: 8
+  resume: false

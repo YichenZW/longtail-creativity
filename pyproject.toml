@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "longtail-creativity"
+version = "0.1.0"
+description = "Code for Evaluating LLM Creativity through Long-Tail Performance"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    "numpy>=1.24",
+    "pyyaml>=6.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+api = ["openai>=1.0"]
+ci = [
+    "flask>=3.0",
+    "nltk>=3.8",
+    "sacremoses>=0.1",
+    "unidecode>=1.3",
+]
+hf = ["torch>=2.0", "transformers>=4.40"]
+reward = ["torch>=2.0", "transformers>=4.40"]
+vllm = ["vllm>=0.6", "transformers>=4.40"]
+datasets = ["datasets>=2.18"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+longtail-creativity = "longtail_creativity.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["longtail_creativity*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
